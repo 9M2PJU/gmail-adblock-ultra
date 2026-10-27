@@ -1,0 +1,295 @@
+/* Gmail AdBlock — Ultra Fast v1.0.0
+ * Strategy: CSS-first (document_start, before first paint) + JS sets
+ * body[data-gmx-*] flags. No layout thrash, display:none only.
+ * Never touches real emails — only nodes positively identified as ads.
+ */
+
+/* ============ 0. Master gate: when disabled, do nothing ============ */
+/* All rules below are scoped to body[data-gmx-enabled="1"] so toggling off restores Gmail instantly. */
+
+/* ============ 1. Sponsored rows (Promotions / Social tabs) ============ */
+/* JS adds .gmx-ad-row to confirmed sponsored rows. CSS hides them instantly on next paint. */
+body[data-gmx-enabled="1"][data-gmx-promoted="1"] .gmx-ad-row {
+  display: none !important;
+}
+
+/* Pre-emptive CSS-only catch for Gmail's known sponsored markers.
+ * These selectors are conservative: they require an explicit Sponsored/Ad label
+ * inside a list row, so real emails are never matched. */
+body[data-gmx-enabled="1"][data-gmx-promoted="1"] tr.zA:has(span[data-is-advertisement]),
+body[data-gmx-enabled="1"][data-gmx-promoted="1"] div.zA:has(span[data-is-advertisement]) {
+  display: none !important;
+}
+
+/* ============ 2. Top-shelf / Top-picks Sponsored carousel ============ */
+/* JS adds .gmx-top-shelf to the carousel container. */
+body[data-gmx-enabled="1"][data-gmx-topshelf="1"] .gmx-top-shelf {
+  display: none !important;
+}
+
+/* CSS-only fallback: Gmail renders the Promotions "Top picks / Sponsored" section
+ * as a grid directly above the list. Real hiding is done by JS-added class
+ * (.gmx-top-shelf) to avoid false positives, so no broad :has() rule here. */
+
+/* ============ 3. Right rail / sidebar promos ============ */
+body[data-gmx-enabled="1"][data-gmx-sidebarads="1"] .gmx-side-promo {
+  display: none !important;
+}
+
+/* ============ 4. Privacy: tracking pixels ============ */
+body[data-gmx-enabled="1"][data-gmx-privacy="1"] img[width="1"][height="1"],
+body[data-gmx-enabled="1"][data-gmx-privacy="1"] img.gmx-tracker {
+  display: none !important;
+  visibility: hidden !important;
+}
+
+/* ============ 5. Enhancements ============ */
+
+/* Hide Chat + Spaces + Meet (left nav bottom) */
+body[data-gmx-enabled="1"][data-gmx-nochatmeet="1"] div[data-test-id="chat-section"],
+body[data-gmx-enabled="1"][data-gmx-nochatmeet="1"] div[data-test-id="spaces-section"],
+body[data-gmx-enabled="1"][data-gmx-nochatmeet="1"] div[data-test-id="meet-section"],
+body[data-gmx-enabled="1"][data-gmx-nochatmeet="1"] div[aria-label="Chat and Spaces"],
+body[data-gmx-enabled="1"][data-gmx-nochatmeet="1"] div[aria-label="Meet"],
+body[data-gmx-enabled="1"][data-gmx-nochatmeet="1"] .gmx-hide-chatmeet {
+  display: none !important;
+}
+
+/* Compact inbox density (reduces row padding, no functionality change) */
+body[data-gmx-enabled="1"][data-gmx-compact="1"] tr.zA td,
+body[data-gmx-enabled="1"][data-gmx-compact="1"] div.zA {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+body[data-gmx-enabled="1"][data-gmx-compact="1"] tr.zA {
+  line-height: 1.25 !important;
+}
+
+/* Hide Gemini button / side-panel upsell */
+body[data-gmx-enabled="1"][data-gmx-nogemini="1"] div[aria-label="Gemini"],
+body[data-gmx-enabled="1"][data-gmx-nogemini="1"] button[aria-label*="Gemini" i],
+body[data-gmx-enabled="1"][data-gmx-nogemini="1"] div[data-test-id="gemini-upsell"],
+body[data-gmx-enabled="1"][data-gmx-nogemini="1"] .gmx-hide-gemini {
+  display: none !important;
+}
+
+/* Hide Google One / storage footer upsell */
+body[data-gmx-enabled="1"][data-gmx-nostorage="1"] div:has(> a[href*="one.google.com"]),
+body[data-gmx-enabled="1"][data-gmx-nostorage="1"] .gmx-hide-storage {
+  display: none !important;
+}
+
+/* Never hide the main UI scaffolding — safety net against over-matching */
+div[role="banner"],
+div[role="navigation"]:first-of-type,
+div[role="main"] {
+  visibility: visible;
+}
+
+/* ============ 6. Themes (work even when ad-blocking is paused) ============ */
+/* Applied via body[data-gmx-theme]. Pure CSS, no per-element JS. */
+
+body[data-gmx-theme="clean-light"] {
+  --gmx-bg: #f6f9ff;
+  --gmx-surface: #ffffff;
+  --gmx-side: #eef3fd;
+  --gmx-text: #1f1f1f;
+  --gmx-muted: #5f6368;
+  --gmx-accent: #1a73e8;
+  --gmx-accent-soft: rgba(26, 115, 232, 0.12);
+  --gmx-on-accent: #ffffff;
+  --gmx-line: #dde5f3;
+  --gmx-hover: #e8f0fe;
+}
+body[data-gmx-theme="soft-dark"],
+body[data-gmx-theme="midnight"],
+body[data-gmx-theme="ocean"],
+body[data-gmx-theme="forest"] {
+  color-scheme: dark;
+}
+body[data-gmx-theme="soft-dark"] {
+  --gmx-bg: #1f2125;
+  --gmx-surface: #282a2f;
+  --gmx-side: #202124;
+  --gmx-text: #e8eaed;
+  --gmx-muted: #9aa0a6;
+  --gmx-accent: #8ab4f8;
+  --gmx-accent-soft: rgba(138, 180, 248, 0.16);
+  --gmx-on-accent: #202124;
+  --gmx-line: #3c4043;
+  --gmx-hover: #303134;
+}
+body[data-gmx-theme="midnight"] {
+  --gmx-bg: #000000;
+  --gmx-surface: #0b0b0c;
+  --gmx-side: #000000;
+  --gmx-text: #ffffff;
+  --gmx-muted: #9aa0a6;
+  --gmx-accent: #8ab4f8;
+  --gmx-accent-soft: rgba(138, 180, 248, 0.18);
+  --gmx-on-accent: #000000;
+  --gmx-line: #262628;
+  --gmx-hover: #1a1a1c;
+}
+body[data-gmx-theme="ocean"] {
+  --gmx-bg: #081426;
+  --gmx-surface: #0d2240;
+  --gmx-side: #0a1930;
+  --gmx-text: #dbeafe;
+  --gmx-muted: #7fa3c7;
+  --gmx-accent: #38bdf8;
+  --gmx-accent-soft: rgba(56, 189, 248, 0.16);
+  --gmx-on-accent: #081426;
+  --gmx-line: #1e3a5f;
+  --gmx-hover: #143054;
+}
+body[data-gmx-theme="forest"] {
+  --gmx-bg: #0c1a12;
+  --gmx-surface: #122619;
+  --gmx-side: #0e2015;
+  --gmx-text: #dcfce7;
+  --gmx-muted: #86a98f;
+  --gmx-accent: #4ade80;
+  --gmx-accent-soft: rgba(74, 222, 128, 0.16);
+  --gmx-on-accent: #0c1a12;
+  --gmx-line: #1e3a28;
+  --gmx-hover: #1a3323;
+}
+body[data-gmx-theme="rose"] {
+  --gmx-bg: #200d13;
+  --gmx-surface: #2c1219;
+  --gmx-side: #230e14;
+  --gmx-text: #ffe4e6;
+  --gmx-muted: #c08a93;
+  --gmx-accent: #fb7185;
+  --gmx-accent-soft: rgba(251, 113, 133, 0.16);
+  --gmx-on-accent: #2c1219;
+  --gmx-line: #4a2230;
+  --gmx-hover: #3a1822;
+}
+body[data-gmx-theme="lavender"] {
+  --gmx-bg: #161230;
+  --gmx-surface: #201a45;
+  --gmx-side: #181436;
+  --gmx-text: #e9e4ff;
+  --gmx-muted: #a79fd1;
+  --gmx-accent: #a78bfa;
+  --gmx-accent-soft: rgba(167, 139, 250, 0.16);
+  --gmx-on-accent: #161230;
+  --gmx-line: #372d6e;
+  --gmx-hover: #2a2358;
+}
+
+/* App surfaces */
+body[data-gmx-theme="clean-light"] div.nH,
+body[data-gmx-theme="soft-dark"] div.nH,
+body[data-gmx-theme="midnight"] div.nH,
+body[data-gmx-theme="ocean"] div.nH,
+body[data-gmx-theme="forest"] div.nH {
+  background: var(--gmx-bg) !important;
+}
+body[data-gmx-theme]:not([data-gmx-theme="default"]) div[role="banner"],
+body[data-gmx-theme]:not([data-gmx-theme="default"]) header#gb {
+  background: var(--gmx-surface) !important;
+  border-bottom: 1px solid var(--gmx-line) !important;
+}
+body[data-gmx-theme]:not([data-gmx-theme="default"]) div[role="navigation"] {
+  background: var(--gmx-side) !important;
+}
+body[data-gmx-theme]:not([data-gmx-theme="default"]) div[role="main"] {
+  background: var(--gmx-surface) !important;
+}
+
+/* List rows */
+body[data-gmx-theme]:not([data-gmx-theme="default"]) tr.zA,
+body[data-gmx-theme]:not([data-gmx-theme="default"]) div.zA {
+  background: var(--gmx-surface) !important;
+  border-bottom: 1px solid var(--gmx-line) !important;
+}
+body[data-gmx-theme]:not([data-gmx-theme="default"]) tr.zA:hover,
+body[data-gmx-theme]:not([data-gmx-theme="default"]) div.zA:hover {
+  background: var(--gmx-hover) !important;
+  box-shadow: none !important;
+}
+body[data-gmx-theme]:not([data-gmx-theme="default"]) tr.zA td,
+body[data-gmx-theme]:not([data-gmx-theme="default"]) tr.zA span,
+body[data-gmx-theme]:not([data-gmx-theme="default"]) div.zA span {
+  color: var(--gmx-text) !important;
+}
+body[data-gmx-theme]:not([data-gmx-theme="default"]) tr.zA span[email],
+body[data-gmx-theme]:not([data-gmx-theme="default"]) tr.zA .yX,
+body[data-gmx-theme]:not([data-gmx-theme="default"]) tr.zA .yW {
+  color: var(--gmx-text) !important;
+}
+body[data-gmx-theme]:not([data-gmx-theme="default"]) tr.zA .yP,
+body[data-gmx-theme]:not([data-gmx-theme="default"]) tr.zA .y2 {
+  color: var(--gmx-muted) !important;
+}
+
+/* Sidebar labels + toolbar */
+body[data-gmx-theme]:not([data-gmx-theme="default"]) div[role="navigation"] a,
+body[data-gmx-theme]:not([data-gmx-theme="default"]) div[role="navigation"] span {
+  color: var(--gmx-text) !important;
+}
+body[data-gmx-theme]:not([data-gmx-theme="default"]) div[role="banner"] input {
+  background: var(--gmx-hover) !important;
+  color: var(--gmx-text) !important;
+  border: 1px solid var(--gmx-line) !important;
+}
+
+/* Reading pane container (NOT the email body itself: .a3s content keeps its own
+ * colors so legitimate HTML emails are never mangled). */
+body[data-gmx-theme]:not([data-gmx-theme="default"]) div.adn {
+  background: var(--gmx-surface) !important;
+}
+
+/* Selected / focused row accent */
+body[data-gmx-theme]:not([data-gmx-theme="default"]) tr.zA.x7,
+body[data-gmx-theme]:not([data-gmx-theme="default"]) tr.zA.v7 {
+  background: var(--gmx-hover) !important;
+  border-left: 3px solid var(--gmx-accent) !important;
+}
+
+/* Unread rows stay distinguishable from read ones */
+body[data-gmx-theme]:not([data-gmx-theme="default"]) tr.zA.zE {
+  background: var(--gmx-hover) !important;
+}
+
+/* Compose button picks up the theme accent */
+body[data-gmx-theme]:not([data-gmx-theme="default"]) div[role="navigation"] .T-I-KE {
+  background: var(--gmx-accent) !important;
+  color: var(--gmx-on-accent) !important;
+}
+
+/* Selected label + hover feedback in the left nav */
+body[data-gmx-theme]:not([data-gmx-theme="default"]) div[role="navigation"] a:hover {
+  background: var(--gmx-hover) !important;
+}
+body[data-gmx-theme]:not([data-gmx-theme="default"]) div[role="navigation"] [aria-selected="true"],
+body[data-gmx-theme]:not([data-gmx-theme="default"]) div[role="navigation"] [aria-current="page"] {
+  background: var(--gmx-accent-soft) !important;
+  border-radius: 0 16px 16px 0 !important;
+}
+
+/* Compose + dialogs (settings, labels, etc.): surfaces and fields only,
+ * action buttons keep Gmail's native styling so they stay recognizable. */
+body[data-gmx-theme]:not([data-gmx-theme="default"]) div[role="dialog"] {
+  background: var(--gmx-surface) !important;
+  color: var(--gmx-text) !important;
+  border: 1px solid var(--gmx-line) !important;
+}
+body[data-gmx-theme]:not([data-gmx-theme="default"]) div[role="dialog"] div[role="textbox"],
+body[data-gmx-theme]:not([data-gmx-theme="default"]) div[role="dialog"] input,
+body[data-gmx-theme]:not([data-gmx-theme="default"]) div[role="dialog"] textarea {
+  background: var(--gmx-hover) !important;
+  color: var(--gmx-text) !important;
+  border-color: var(--gmx-line) !important;
+}
+
+/* Gentle cross-fade when switching themes (themed chrome only, not emails) */
+body[data-gmx-theme]:not([data-gmx-theme="default"]) div[role="banner"],
+body[data-gmx-theme]:not([data-gmx-theme="default"]) div[role="navigation"],
+body[data-gmx-theme]:not([data-gmx-theme="default"]) div[role="main"],
+body[data-gmx-theme]:not([data-gmx-theme="default"]) tr.zA {
+  transition: background-color 0.18s ease;
+}

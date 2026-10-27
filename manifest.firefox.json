@@ -1,0 +1,48 @@
+{
+  "manifest_version": 2,
+  "name": "Gmail AdBlock — Ultra Fast + Enhancements",
+  "short_name": "Gmail AdBlock",
+  "version": "1.2.0",
+  "description": "Ultra-fast, stable ad blocker for Gmail. Hides Sponsored rows, top-picks carousels and tracking pixels. Plus clean-inbox enhancements and themes.",
+  "author": "9M2PJU",
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "browser_action": {
+    "default_popup": "src/popup.html",
+    "default_title": "Gmail AdBlock",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "background": {
+    "scripts": ["src/background.js"],
+    "persistent": true
+  },
+  "permissions": [
+    "storage",
+    "webRequest",
+    "webRequestBlocking",
+    "https://mail.google.com/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": ["https://mail.google.com/*"],
+      "js": ["src/content.js"],
+      "css": ["src/content.css"],
+      "run_at": "document_start",
+      "all_frames": false
+    }
+  ],
+  "browser_specific_settings": {
+    "gecko": {
+      "strict_min_version": "109.0"
+    }
+  }
+}

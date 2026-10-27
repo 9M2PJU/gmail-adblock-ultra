@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Gmail AdBlock</title>
+<link rel="stylesheet" href="popup.css" />
+</head>
+<body>
+  <header class="head">
+    <img src="../icons/icon48.png" alt="Gmail AdBlock logo" class="logo" />
+    <div class="title">
+      <h1>Gmail AdBlock</h1>
+      <p class="sub">Ultra-fast &amp; stable</p>
+    </div>
+    <label class="master" title="Enable / disable all blocking">
+      <input type="checkbox" id="enabled" />
+      <span class="pill"></span>
+    </label>
+  </header>
+
+  <section class="stats">
+    <div class="stat">
+      <span class="num" id="blockedTotal">0</span>
+      <span class="lbl">ads &amp; trackers blocked</span>
+    </div>
+    <div class="status" id="status">Protecting Gmail</div>
+  </section>
+
+  <main class="groups">
+    <h2>Ad blocking</h2>
+    <label class="row"><span><strong>Sponsored rows</strong><em>Hide “Sponsored” emails in Promotions / Social</em></span><input type="checkbox" id="blockPromoted" /><span class="switch"></span></label>
+    <label class="row"><span><strong>Top-picks shelf</strong><em>Hide Sponsored carousel above the list</em></span><input type="checkbox" id="blockTopShelf" /><span class="switch"></span></label>
+    <label class="row"><span><strong>Side-rail promos</strong><em>Hide ad links in the side panel</em></span><input type="checkbox" id="blockSidebarAds" /><span class="switch"></span></label>
+    <label class="row"><span><strong>Tracking pixels</strong><em>Block 1px read-trackers (privacy)</em></span><input type="checkbox" id="privacy" /><span class="switch"></span></label>
+
+    <h2>Enhancements</h2>
+    <label class="row"><span><strong>Hide Chat &amp; Meet</strong><em>Cleaner left sidebar</em></span><input type="checkbox" id="hideChatMeet" /><span class="switch"></span></label>
+    <label class="row"><span><strong>Compact inbox</strong><em>Tighter rows, more emails on screen</em></span><input type="checkbox" id="compact" /><span class="switch"></span></label>
+    <label class="row"><span><strong>Hide Gemini upsell</strong><em>Remove Gemini button / prompts</em></span><input type="checkbox" id="hideGemini" /><span class="switch"></span></label>
+    <label class="row"><span><strong>Hide storage upsell</strong><em>Remove Google One footer nudge</em></span><input type="checkbox" id="hideStorage" /><span class="switch"></span></label>
+
+    <h2>Themes</h2>
+    <div class="themes" id="themes">
+      <button type="button" class="theme" data-theme="default" title="Default Gmail"><span class="dot dot-default"></span>Default</button>
+      <button type="button" class="theme" data-theme="clean-light" title="Clean Light"><span class="dot dot-light"></span>Light</button>
+      <button type="button" class="theme" data-theme="soft-dark" title="Soft Dark"><span class="dot dot-dark"></span>Dark</button>
+      <button type="button" class="theme" data-theme="midnight" title="Midnight OLED"><span class="dot dot-midnight"></span>Midnight</button>
+      <button type="button" class="theme" data-theme="ocean" title="Ocean"><span class="dot dot-ocean"></span>Ocean</button>
+      <button type="button" class="theme" data-theme="forest" title="Forest"><span class="dot dot-forest"></span>Forest</button>
+      <button type="button" class="theme" data-theme="rose" title="Rose"><span class="dot dot-rose"></span>Rose</button>
+      <button type="button" class="theme" data-theme="lavender" title="Lavender"><span class="dot dot-lav"></span>Lavender</button>
+    </div>
+    <p class="tip">Tip: pair a dark theme with Gmail's own Dark theme (Settings → Theme) so message bodies match.</p>
+
+    <h2>Support</h2>
+    <div class="support">
+      <span class="heart" aria-hidden="true">❤</span>
+      <p>Free forever. If it cleans up your inbox, consider sponsoring development.</p>
+      <a class="donate" href="https://github.com/sponsors/9M2PJU" target="_blank" rel="noopener">Donate via GitHub Sponsors</a>
+    </div>
+  </main>
+
+  <footer class="foot">
+    <button id="reset" type="button">Reset defaults</button>
+    <span class="ver">v1.2.0</span>
+    <a href="https://mail.google.com/" target="_blank" rel="noopener">Open Gmail →</a>
+  </footer>
+
+<script src="popup.js"></script>
+</body>
+</html>

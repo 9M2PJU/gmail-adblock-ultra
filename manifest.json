@@ -1,0 +1,52 @@
+{
+  "manifest_version": 3,
+  "name": "Gmail AdBlock — Ultra Fast + Enhancements",
+  "short_name": "Gmail AdBlock",
+  "version": "1.2.0",
+  "description": "Ultra-fast, stable ad blocker for Gmail. Hides Sponsored rows, top-picks carousels and tracking pixels. Plus clean-inbox enhancements and themes.",
+  "author": "9M2PJU",
+  "minimum_chrome_version": "88",
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "action": {
+    "default_popup": "src/popup.html",
+    "default_title": "Gmail AdBlock",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "background": {
+    "service_worker": "src/background.js"
+  },
+  "permissions": ["storage", "declarativeNetRequest"],
+  "host_permissions": ["https://mail.google.com/*"],
+  "declarative_net_request": {
+    "rule_resources": [
+      {
+        "id": "gmail_ads",
+        "enabled": true,
+        "path": "rules/dnr.json"
+      }
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://mail.google.com/*"],
+      "js": ["src/content.js"],
+      "css": ["src/content.css"],
+      "run_at": "document_start",
+      "all_frames": false
+    }
+  ],
+  "web_accessible_resources": [],
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'"
+  }
+}
