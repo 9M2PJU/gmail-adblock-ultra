@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "Gmail AdBlock — Ultra Fast + Enhancements",
   "short_name": "Gmail AdBlock",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Ultra-fast, stable ad blocker for Gmail. Hides Sponsored rows, top-picks carousels and tracking pixels. Plus clean-inbox enhancements and themes.",
   "author": "9M2PJU",
   "icons": {
