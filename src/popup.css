@@ -136,15 +136,18 @@ body {
 }
 .support .heart { color: #ea4aaa; font-size: 18px; }
 .support p { margin: 4px 0 8px; font-size: 12px; color: var(--muted); }
+.donate-list { display: grid; gap: 6px; }
 .donate {
-  display: inline-block;
-  background: #24292f;
-  color: #fff !important;
+  display: block;
   text-decoration: none;
   font-weight: 600;
   font-size: 12px;
   padding: 7px 14px;
   border-radius: 8px;
 }
-.donate:hover { background: #000; }
+.donate:hover { filter: brightness(0.92); }
+.donate.paypal { background: #00457C; color: #fff !important; }
+.donate.bmc { background: #FFDD00; color: #000 !important; }
+.donate.wise { background: #163300; color: #fff !important; }
+.donate.gh { background: #24292f; color: #fff !important; }
 .ver { color: var(--muted); font-size: 11px; }

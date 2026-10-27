@@ -89,9 +89,12 @@ Issues and PRs are welcome. Please keep changes small, avoid touching email cont
 
 ## ❤ Support
 
-Free forever. If it cleans up your inbox, consider sponsoring development:
+Free forever. If it cleans up your inbox, consider supporting development:
 
-**[💖 Donate via GitHub Sponsors](https://github.com/sponsors/9M2PJU)**
+[![PayPal](https://img.shields.io/badge/PayPal-9M2PJU-00457C?style=for-the-badge&logo=paypal&logoColor=white)](https://paypal.me/9M2PJU)
+[![Buy Me a Coffee](https://img.shields.io/badge/Buy_Me_a_Coffee-9M2PJU-FFDD00?style=for-the-badge&logo=buy-me-a-coffee&logoColor=black)](https://buymeacoffee.com/9m2pju)
+[![Wise](https://img.shields.io/badge/Wise-faizulz13-163300?style=for-the-badge&logo=wise&logoColor=white)](https://wise.com/pay/me/faizulz13)
+[![GitHub Sponsors](https://img.shields.io/badge/Sponsor-9M2PJU-ea4aaa?style=for-the-badge&logo=github)](https://github.com/sponsors/9M2PJU)
 
 ## 📄 License
 
