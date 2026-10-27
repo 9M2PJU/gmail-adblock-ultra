@@ -155,15 +155,18 @@
     try {
       if (node instanceof Element) {
         if (seen.has(node)) return 0;
+        // Never ad-hide inside an opened message: real emails can contain
+        // "Sponsored"/"Ad" marker text. Trackers/enhancements still run.
+        const inMessage = node.closest ? !!node.closest('div.adn') : false;
         // Fast path 1: explicit ad marker Gmail sometimes sets.
-        if (node.matches && node.matches('span[data-is-advertisement]')) {
+        if (!inMessage && node.matches && node.matches('span[data-is-advertisement]')) {
           const row = findRow(node);
           if (row && settings.blockPromoted && hideRow(row)) hits++;
           if (settings.blockTopShelf && maybeTopShelf(node)) hits++;
           return hits;
         }
         // Fast path 2: the node itself is a sponsored badge.
-        if ((node.tagName === 'SPAN' || node.tagName === 'DIV') && isSponsoredLabel(node)) {
+        if (!inMessage && (node.tagName === 'SPAN' || node.tagName === 'DIV') && isSponsoredLabel(node)) {
           if (settings.blockPromoted) {
             const row = findRow(node);
             if (row && hideRow(row)) hits++;
@@ -172,7 +175,7 @@
           return hits;
         }
         // Fast path 3: subtree contains badges (only scan small subtrees).
-        if (node.querySelectorAll && node.childElementCount <= 60) {
+        if (!inMessage && node.querySelectorAll && node.childElementCount <= 60) {
           const spans = node.querySelectorAll('span[data-is-advertisement]');
           for (const s of spans) {
             const row = findRow(s);
@@ -299,6 +302,7 @@
     try {
       const badges = document.querySelectorAll('span[data-is-advertisement]');
       for (const s of badges) {
+        if (s.closest && s.closest('div.adn')) continue; // never hide inside opened mail
         const row = findRow(s);
         if (row && settings.blockPromoted && hideRow(row)) hits++;
         if (settings.blockTopShelf && maybeTopShelf(s)) hits++;
@@ -313,6 +317,7 @@
           let scanned = 0;
           for (const s of spans) {
             if (++scanned > 600) break;
+            if (s.closest && s.closest('div.adn')) continue; // never hide inside opened mail
             if (isSponsoredLabel(s)) {
               const row = findRow(s);
               if (row && settings.blockPromoted && hideRow(row)) hits++;
