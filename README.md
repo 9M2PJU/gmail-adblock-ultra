@@ -36,7 +36,7 @@ An ultra-fast, stable browser extension that removes Gmail's **Sponsored** ads, 
 | Rose | Dark romantic pink |
 | Lavender | Dark purple |
 
-> Tip: pair a dark theme with Gmail's own Dark theme (Settings → Theme) so message bodies match. Email bodies themselves are never recolored — legitimate HTML emails always render correctly.
+> Dark themes auto-darken message bodies with hue-preserving inversion (photos and videos stay normal). Label pills, native buttons and icons are never touched.
 
 **Why it's fast & stable**
 - **CSS-first**: blocking CSS injects at `document_start`, before first paint — ads never flash.

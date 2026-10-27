@@ -90,8 +90,10 @@ div[role="main"] {
 /* Applied via body[data-gmx-theme]. Pure CSS, no per-element JS.
  * Design: theme the entire Gmail *chrome* (banner, nav, list, toolbar,
  * tabs, dialogs, menus) with one consistent palette per theme.
- * NEVER touched: email bodies (.a3s), label pills (.av), native buttons
- * (.T-I), icons (svg/img), inline-background chips. Font stack is Gmail's
+ * NEVER touched: label pills (.av), native buttons
+ * (.T-I), icons (svg/img), inline-background chips. Email bodies (.a3s)
+ * are dark-rendered in dark themes via hue-preserving inversion (media
+ * counter-inverted, print exempt). Font stack is Gmail's
  * own on purpose — overriding it breaks icon glyphs and row layout. */
 
 body[data-gmx-theme="clean-light"] {
@@ -272,9 +274,55 @@ body[data-gmx-theme]:not([data-gmx-theme="default"]) div[role="banner"] input {
   border: 1px solid var(--gmx-line) !important;
 }
 
-/* ---- Reading pane container (email bodies untouched, see above) ---- */
+/* ---- Reading pane container ---- */
 body[data-gmx-theme]:not([data-gmx-theme="default"]) div.adn {
   background: var(--gmx-surface) !important;
+}
+
+/* ---- Message headers (sender / date / subject chrome around the body) ---- */
+body[data-gmx-theme]:not([data-gmx-theme="default"]) div.adn .gD {
+  color: var(--gmx-text) !important;
+}
+body[data-gmx-theme]:not([data-gmx-theme="default"]) div.adn .go,
+body[data-gmx-theme]:not([data-gmx-theme="default"]) div.adn .g3 {
+  color: var(--gmx-muted) !important;
+}
+/* Attachment chips + clipped-message bars keep a themed surface so their
+ * (now themed) text stays readable */
+body[data-gmx-theme]:not([data-gmx-theme="default"]) div.adn .aZo,
+body[data-gmx-theme]:not([data-gmx-theme="default"]) div.adn .adL,
+body[data-gmx-theme]:not([data-gmx-theme="default"]) div.adn .adI {
+  background: var(--gmx-hover) !important;
+  border-color: var(--gmx-line) !important;
+}
+
+/* ---- Email bodies in dark themes: hue-preserving dark rendering ----
+ * Arbitrary HTML mail can't be recolored rule-by-rule, so dark themes invert
+ * the whole message (same technique as dedicated dark-mode engines) and
+ * counter-invert photos, videos, icons and image-backgrounds so media looks
+ * normal. Clean Light keeps native rendering. */
+body[data-gmx-theme="soft-dark"] div.a3s,
+body[data-gmx-theme="midnight"] div.a3s,
+body[data-gmx-theme="ocean"] div.a3s,
+body[data-gmx-theme="forest"] div.a3s,
+body[data-gmx-theme="rose"] div.a3s,
+body[data-gmx-theme="lavender"] div.a3s {
+  background: #ffffff !important;
+  filter: invert(1) hue-rotate(180deg) !important;
+}
+body[data-gmx-theme="soft-dark"] div.a3s :is(img, picture, figure, video, svg, canvas, [style*="background-image"], [background]),
+body[data-gmx-theme="midnight"] div.a3s :is(img, picture, figure, video, svg, canvas, [style*="background-image"], [background]),
+body[data-gmx-theme="ocean"] div.a3s :is(img, picture, figure, video, svg, canvas, [style*="background-image"], [background]),
+body[data-gmx-theme="forest"] div.a3s :is(img, picture, figure, video, svg, canvas, [style*="background-image"], [background]),
+body[data-gmx-theme="rose"] div.a3s :is(img, picture, figure, video, svg, canvas, [style*="background-image"], [background]),
+body[data-gmx-theme="lavender"] div.a3s :is(img, picture, figure, video, svg, canvas, [style*="background-image"], [background]) {
+  filter: invert(1) hue-rotate(180deg) !important;
+}
+@media print {
+  body[data-gmx-theme]:not([data-gmx-theme="default"]) div.a3s,
+  body[data-gmx-theme]:not([data-gmx-theme="default"]) div.a3s :is(img, picture, figure, video, svg, canvas) {
+    filter: none !important;
+  }
 }
 
 /* ---- Selected / focused / unread rows ---- */
