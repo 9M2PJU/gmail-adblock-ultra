@@ -52,7 +52,7 @@ Buy Me a Coffee: https://buymeacoffee.com/9m2pju
 Wise: https://wise.com/pay/me/faizulz13
 GitHub Sponsors: https://github.com/sponsors/9M2PJU
 
-Version 1.3.0 — Removed inbox themes to focus on fast, stable ad blocking.
+Version 1.3.1 — Same as 1.3.0 plus Android support declaration and store-metadata fixes.
 
 (CWS strips markdown: paste as plain text with line breaks. No implementation
 details, no API names, no superlatives above.)
@@ -156,7 +156,8 @@ https://github.com/9M2PJU/gmail-adblock-ultra
 
 | Version | Date | Changes | Status |
 |---------|------|---------|--------|
-| 1.3.0 | 2026-10-29 | Removed inbox themes; manifest description shortened to 116 chars (CWS 132 limit); README excluded from submission ZIP per review checklist. | Draft |
+| 1.3.1 | 2026-10-29 | Version bump for resubmission (1.3.0 never published). | Draft |
+| 1.3.0 | 2026-10-29 | Removed inbox themes; manifest description shortened to 116 chars (CWS 132 limit); README excluded from submission ZIP per review checklist. | Superseded |
 | 1.2.4 | 2026-10-28 | Reverted email inversion; message bodies keep sender design; ad-hider banned inside opened mail. | Not submitted |
 
 ## Review Notes

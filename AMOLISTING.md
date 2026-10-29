@@ -1,10 +1,10 @@
 # AMO Listing — Gmail AdBlock
 
-> Last Updated: 2026-10-29. Version 1.3.0 (MV2, `manifest.firefox.json`).
+> Last Updated: 2026-10-29. Version 1.3.1 (MV2, `manifest.firefox.json`).
 
 ## Upload file
 
-`dist/gmail-adblock-ultra-firefox-v1.3.0.zip` — manifest.json at zip root, 15 files.
+`dist/gmail-adblock-ultra-firefox-v1.3.1.zip` — manifest.json at zip root, 15 files.
 
 ## Validator status (addons-linter, 2026-10-29)
 
@@ -45,7 +45,7 @@ Support: https://github.com/9M2PJU/gmail-adblock-ultra/issues
 Donate: https://paypal.me/9M2PJU · https://buymeacoffee.com/9m2pju ·
 https://wise.com/pay/me/faizulz13 · https://github.com/sponsors/9M2PJU
 
-Version 1.3.0 — Removed inbox themes to focus on fast, stable ad blocking.
+Version 1.3.1 — Same as 1.3.0 plus Android support declaration and store-metadata fixes.
 
 **Categories**
 Primary: Privacy & Security · Secondary: Productivity
@@ -84,4 +84,5 @@ optionally add a Gmail before/after shot later.
 
 | Version | Date | Changes | Status |
 |---------|------|---------|--------|
-| 1.3.0 | 2026-10-29 | No themes; added `data_collection_permissions: none` (AMO Nov-2025 requirement). | Draft |
+| 1.3.1 | 2026-10-29 | Version bump for submission. | Draft |
+| 1.3.0 | 2026-10-29 | No themes; added `data_collection_permissions: none` (AMO Nov-2025 requirement). | Superseded |
