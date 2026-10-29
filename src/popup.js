@@ -8,13 +8,10 @@ const DEFAULTS = {
   hideChatMeet: false,
   compact: false,
   hideGemini: false,
-  hideStorage: false,
-  theme: 'default'
+  hideStorage: false
 };
 
-const THEMES = ['default', 'clean-light', 'soft-dark', 'midnight', 'ocean', 'forest', 'rose', 'lavender'];
-
-const ids = Object.keys(DEFAULTS).filter((id) => id !== 'theme');
+const ids = Object.keys(DEFAULTS);
 const els = Object.fromEntries(ids.map((id) => [id, document.getElementById(id)]));
 const blockedEl = document.getElementById('blockedTotal');
 const statusEl = document.getElementById('status');
@@ -48,7 +45,6 @@ function notifyTabs(patch) {
 chrome.storage.sync.get(DEFAULTS, (s) => {
   for (const id of ids) els[id].checked = Boolean((s || DEFAULTS)[id]);
   paintStatus(els.enabled.checked);
-  paintTheme((s && s.theme) || 'default');
 });
 
 chrome.storage.local.get({ blockedTotal: 0 }, (r) => {
@@ -68,22 +64,6 @@ document.getElementById('reset').addEventListener('click', () => {
   chrome.storage.sync.set(DEFAULTS, () => {
     for (const id of ids) els[id].checked = Boolean(DEFAULTS[id]);
     paintStatus(true);
-    paintTheme('default');
   });
   notifyTabs({ ...DEFAULTS });
-});
-
-function paintTheme(current) {
-  document.querySelectorAll('#themes .theme').forEach((btn) => {
-    btn.classList.toggle('active', btn.dataset.theme === current);
-  });
-}
-
-document.querySelectorAll('#themes .theme').forEach((btn) => {
-  btn.addEventListener('click', () => {
-    const theme = THEMES.includes(btn.dataset.theme) ? btn.dataset.theme : 'default';
-    chrome.storage.sync.set({ theme });
-    notifyTabs({ theme }); // instant; storage write is the durable fallback
-    paintTheme(theme);
-  });
 });

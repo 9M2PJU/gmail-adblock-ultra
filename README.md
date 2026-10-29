@@ -6,7 +6,7 @@
 [![Firefox MV2](https://img.shields.io/badge/Firefox-MV2-ff7139?logo=firefox&logoColor=white)](https://github.com/9M2PJU/gmail-adblock-ultra/releases)
 [![Sponsor](https://img.shields.io/badge/Sponsor-❤-ea4aaa?logo=github)](https://github.com/sponsors/9M2PJU)
 
-An ultra-fast, stable browser extension that removes Gmail's **Sponsored** ads, blocks tracking pixels at the network level, and tidies the inbox with enhancements and themes. No page slowdown, no broken emails, no data collection.
+An ultra-fast, stable browser extension that removes Gmail's **Sponsored** ads, blocks tracking pixels at the network level, and tidies the inbox with enhancements. No page slowdown, no broken emails, no data collection.
 
 ![logo](icons/logo.svg)
 
@@ -23,20 +23,6 @@ An ultra-fast, stable browser extension that removes Gmail's **Sponsored** ads, 
 - Compact inbox density
 - Hide Gemini upsell
 - Hide Google One / storage upsell
-
-**Themes** (8, pure CSS)
-| Theme | Style |
-|---|---|
-| Default | Untouched Gmail |
-| Clean Light | Bright, subtle blue tint |
-| Soft Dark | Easy-on-the-eyes gray dark |
-| Midnight | True-black OLED dark |
-| Ocean | Deep-blue dark |
-| Forest | Green-tinted dark |
-| Rose | Dark romantic pink |
-| Lavender | Dark purple |
-
-> Message bodies always render the sender's original light design on the themed surface — deterministic and unbreakable. (Forcing dark email bodies broke real emails; tried, reverted.)
 
 **Why it's fast & stable**
 - **CSS-first**: blocking CSS injects at `document_start`, before first paint — ads never flash.
@@ -74,8 +60,8 @@ manifest.json            Chrome MV3 manifest
 manifest.firefox.json    Firefox MV2 manifest
 src/
   content.js             blocking engine (runs at document_start)
-  content.css            CSS-first hiding + themes
-  popup.html/.css/.js    switches, theme picker, counter, donate button
+  content.css            CSS-first hiding rules
+  popup.html/.css/.js    switches, counter, donate button
   background.js          Chrome MV3 service worker (defaults + DNR toggle sync)
   background.firefox.js  Firefox MV2 background (defaults + webRequest blocking)
 rules/dnr.json           Chrome network block rules (Gmail-scoped)

@@ -95,37 +95,6 @@ body {
 }
 .foot button:hover { background: var(--soft); }
 .foot a { color: var(--blue); text-decoration: none; font-weight: 600; }
-.themes {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 8px;
-  padding: 6px 0 4px;
-}
-.theme {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  border: 1px solid var(--line);
-  background: #fff;
-  border-radius: 10px;
-  padding: 9px 10px;
-  font-size: 12px;
-  font-weight: 600;
-  cursor: pointer;
-}
-.theme:hover { background: var(--soft); }
-.theme.active { border-color: var(--blue); box-shadow: 0 0 0 1px var(--blue); }
-.theme.active .dot { outline: 2px solid var(--blue); outline-offset: 1px; }
-.dot { width: 18px; height: 18px; border-radius: 50%; flex: none; border: 1px solid rgba(0,0,0,.2); }
-.dot-default { background: linear-gradient(135deg, #fff 50%, #dadce0 50%); }
-.dot-light { background: linear-gradient(135deg, #ffffff 55%, #1a73e8 55%); }
-.dot-dark { background: linear-gradient(135deg, #282a2f 55%, #8ab4f8 55%); }
-.dot-midnight { background: #000; border-color: #5f6368; }
-.dot-ocean { background: linear-gradient(135deg, #0d2240 55%, #38bdf8 55%); }
-.dot-forest { background: linear-gradient(135deg, #122619 55%, #4ade80 55%); }
-.dot-rose { background: linear-gradient(135deg, #2c1219 55%, #fb7185 55%); }
-.dot-lav { background: linear-gradient(135deg, #201a45 55%, #a78bfa 55%); }
-.tip { color: var(--muted); font-size: 11px; margin: 6px 0 10px; }
 .support {
   border: 1px solid #f0c6d3;
   background: #fdf2f5;

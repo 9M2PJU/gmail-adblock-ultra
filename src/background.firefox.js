@@ -9,8 +9,7 @@ const DEFAULTS = {
   hideChatMeet: false,
   compact: false,
   hideGemini: false,
-  hideStorage: false,
-  theme: 'default'
+  hideStorage: false
 };
 
 const BLOCK_URLS = [

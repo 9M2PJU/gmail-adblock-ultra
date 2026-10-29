@@ -8,8 +8,7 @@ const DEFAULTS = {
   hideChatMeet: false,
   compact: false,
   hideGemini: false,
-  hideStorage: false,
-  theme: 'default'
+  hideStorage: false
 };
 
 chrome.runtime.onInstalled.addListener((details) => {

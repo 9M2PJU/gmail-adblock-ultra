@@ -14,14 +14,11 @@
     hideChatMeet: false,
     compact: false,
     hideGemini: false,
-    hideStorage: false,
-    theme: 'default'       // default | clean-light | soft-dark | midnight | ocean | forest | rose | lavender
+    hideStorage: false
   };
 
   // Localized "Sponsored" / "Ad" badge texts seen in Gmail list rows.
   const SPONSORED_RE = /^(sponsored|ad|annonce|sponsorisé|gesponsert|anzeige|patrocinado|anuncio|sponsorizzato|sponsorlu|gesponsord|sponzorováno|szponzorált|χορηγούμενη|спонсор|реклама|赞助|廣告|スポンサー|광고|sponsrad|gesponsord)$/i;
-  const THEMES = new Set(['default', 'clean-light', 'soft-dark', 'midnight', 'ocean', 'forest', 'rose', 'lavender']);
-
   const SELECTOR_ROW = 'tr.zA, tr.zA.yO, tr.zA.zE, div.zA';
   const MAX_DEPTH = 9;
   const seen = new WeakSet();
@@ -35,7 +32,6 @@
 
   function applySettings(s) {
     settings = { ...DEFAULTS, ...s };
-    const theme = typeof settings.theme === 'string' ? settings.theme : 'default';
     // Set flags on BOTH <html> and <body>: CSS reads body[data-gmx-*], and
     // setting both covers document_start (pre-body) plus instant popup toggles.
     const setAttrs = (t) => {
@@ -48,8 +44,6 @@
       t.dataset.gmxCompact = settings.compact ? '1' : '0';
       t.dataset.gmxNogemini = settings.hideGemini ? '1' : '0';
       t.dataset.gmxNostorage = settings.hideStorage ? '1' : '0';
-      // Theme applies independently of the ad-block master switch.
-      t.dataset.gmxTheme = THEMES.has(theme) ? theme : 'default';
     };
     if (document.documentElement) setAttrs(document.documentElement);
     if (document.body) setAttrs(document.body);
@@ -395,8 +389,6 @@
       }
       if (!dirty) return;
       applySettings(settings);
-      const keys = Object.keys(patch);
-      if (keys.length === 1 && keys[0] === 'theme') return; // theme is CSS-only
       if (!settings.enabled) unhideAll();
       else fullSweep();
     }
