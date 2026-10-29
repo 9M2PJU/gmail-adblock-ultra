@@ -64,18 +64,18 @@ English
 | Asset | Dimensions | Status | Filename |
 |-------|-----------|--------|----------|
 | Store Icon [REQUIRED] | 128×128 PNG | ✅ Ready | icons/icon128.png |
-| Screenshot 1 [REQUIRED] | 1280×800 or 640×400 | ⬜ Not created | |
+| Screenshot 1 [REQUIRED] | 1280×800 or 640×400 | ✅ Ready | store-assets/screenshot-1-1280x800.png |
 | Screenshot 2 [RECOMMENDED] | 1280×800 or 640×400 | ⬜ Not created | |
 | Screenshot 3 [RECOMMENDED] | 1280×800 or 640×400 | ⬜ Not created | |
 | Small Promo Tile [RECOMMENDED] | 440×280 | ⬜ Not created | |
 | Marquee Promo Tile | 1400×560 | ⬜ Not created | |
 
 ### Screenshot Notes
-1. Gmail Promotions tab with a Sponsored row hidden vs. shown (before/after, annotated).
-2. The extension popup showing the switches and blocked-ads counter.
+`store-assets/screenshot-1-1280x800.png` — real popup render (fresh-install defaults)
+on the left, truthful feature bullets on the right. 1280×800 exact.
+Recommended additions (capture yourself in Chrome at 1280×800):
+2. Gmail Promotions tab with a Sponsored row hidden (before/after, annotated).
 3. Inbox with Hide Chat & Meet + Compact density enabled (annotated).
-Screenshots must show the real current UI (v1.3.0, no themes) at exactly
-1280×800 or 640×400. No phone/tablet mockups.
 
 ## Permissions Justification
 
@@ -123,9 +123,8 @@ for ad hiding (hiding is display-only, badge-based, list rows only).
 ## Privacy Policy
 
 **Privacy Policy URL** [REQUIRED]
-⬜ TODO — host the text from PRIVACY.md at a stable public URL before submitting
-(e.g. GitHub Pages, public Gist, or project site). The review team opens this link;
-a 404 is an auto-reject. Then paste the URL here.
+https://gist.github.com/9M2PJU/2731ab7ca06f3e6ba671f6c3068f0493
+(Live, verified 2026-10-29. If PRIVACY.md changes, update the gist to match.)
 
 ## Distribution
 
@@ -135,7 +134,7 @@ a 404 is an auto-reject. Then paste the URL here.
 ## Developer Info
 
 **Publisher Name** [REQUIRED]
-⬜ TODO — e.g. 9M2PJU
+9M2PJU
 
 **Contact Email** [REQUIRED]
 ⬜ TODO — must be a monitored address (Google sends takedown/policy notices here).
