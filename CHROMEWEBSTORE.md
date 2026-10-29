@@ -45,6 +45,13 @@ SUPPORT
 Found a bug? Have a suggestion? Open an issue at
 https://github.com/9M2PJU/gmail-adblock-ultra/issues
 
+DONATE
+Gmail AdBlock is free forever. If it cleans up your inbox, consider supporting development:
+PayPal: https://paypal.me/9M2PJU
+Buy Me a Coffee: https://buymeacoffee.com/9m2pju
+Wise: https://wise.com/pay/me/faizulz13
+GitHub Sponsors: https://github.com/sponsors/9M2PJU
+
 Version 1.3.0 — Removed inbox themes to focus on fast, stable ad blocking.
 
 (CWS strips markdown: paste as plain text with line breaks. No implementation
