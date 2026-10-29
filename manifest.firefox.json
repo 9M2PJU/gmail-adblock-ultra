@@ -3,7 +3,7 @@
   "name": "Gmail AdBlock — Ultra Fast + Enhancements",
   "short_name": "Gmail AdBlock",
   "version": "1.3.0",
-  "description": "Ultra-fast, stable ad blocker for Gmail. Hides Sponsored rows, top-picks carousels and tracking pixels. Plus clean-inbox enhancements.",
+  "description": "Ultra-fast Gmail ad blocker. Hides Sponsored rows, top-picks carousels and tracking pixels. Plus inbox enhancements.",
   "author": "9M2PJU",
   "icons": {
     "16": "icons/icon16.png",
