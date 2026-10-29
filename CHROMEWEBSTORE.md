@@ -130,8 +130,8 @@ for ad hiding (hiding is display-only, badge-based, list rows only).
 ## Privacy Policy
 
 **Privacy Policy URL** [REQUIRED]
-https://gist.github.com/9M2PJU/2731ab7ca06f3e6ba671f6c3068f0493
-(Live, verified 2026-10-29. If PRIVACY.md changes, update the gist to match.)
+https://github.com/9M2PJU/gmail-adblock-ultra/blob/main/PRIVACY.md
+(Live, verified 2026-10-29. Keep in sync with PRIVACY.md on main.)
 
 ## Distribution
 
