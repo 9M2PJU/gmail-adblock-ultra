@@ -10,7 +10,9 @@ mkdir -p dist/chrome dist/firefox
 
 # --- Chrome (MV3): everything as-is ---
 cp manifest.json dist/chrome/
-cp -r icons src rules LICENSE README.md dist/chrome/
+# NOTE: README.md / CHROMEWEBSTORE.md / PRIVACY.md are docs, not runtime files —
+# the CWS review checklist requires excluding them from the submission ZIP.
+cp -r icons src rules LICENSE dist/chrome/
 rm -f dist/chrome/src/background.firefox.js dist/chrome/manifest.firefox.json
 
 # --- Firefox (MV2): swap manifest + webRequest background, drop DNR rules ---
@@ -19,7 +21,7 @@ mkdir -p dist/firefox/src dist/firefox/icons
 cp icons/* dist/firefox/icons/
 cp src/content.js src/content.css src/popup.html src/popup.css src/popup.js dist/firefox/src/
 cp src/background.firefox.js dist/firefox/src/background.js
-cp LICENSE README.md dist/firefox/
+cp LICENSE dist/firefox/
 
 # Validate manifests
 python3 - <<'EOF'
