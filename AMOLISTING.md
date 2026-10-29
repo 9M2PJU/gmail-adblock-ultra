@@ -11,7 +11,7 @@
 0 errors, 0 notices. Remaining warnings are all benign:
 - `MISSING_ADDON_ID` — correct to omit; AMO assigns a GUID on first signing (MV2).
 - `STORAGE_SYNC` ×8 — only affects temporary `about:debugging` loads without an ID.
-- `KEY_FIREFOX_*_UNSUPPORTED_BY_MIN_VERSION` ×2 — `data_collection_permissions`
+- `KEY_FIREFOX_*_UNSUPPORTED_BY_MIN_VERSION` ×3 — `data_collection_permissions`
   needs FF 140+/Android 142+ and is ignored on older clients. Kept
   `strict_min_version: 109.0` for max compatibility; the value is `"none"`,
   which needs no consent UI anywhere.
@@ -54,7 +54,10 @@ Primary: Privacy & Security · Secondary: Productivity
 **Support**: https://github.com/9M2PJU/gmail-adblock-ultra/issues
 **Privacy policy**: https://github.com/9M2PJU/gmail-adblock-ultra/blob/main/PRIVACY.md
 **License**: MIT License
-**Firefox compatibility**: 109.0 and later (desktop; Android not targeted)
+**Firefox compatibility**: 109.0 and later, desktop and Android.
+On Android, open mail.google.com in Desktop-site mode for full ad-blocking
+(the mobile Gmail layout uses different markup); network-level tracker
+blocking works in either mode.
 
 ## Permissions justification (reviewer notes field)
 

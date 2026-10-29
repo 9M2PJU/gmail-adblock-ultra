@@ -37,7 +37,7 @@ An ultra-fast, stable browser extension that removes Gmail's **Sponsored** ads, 
    - Chrome/Edge/Brave: `gmail-adblock-ultra-chrome-vX.Y.Z.zip`
    - Firefox: `gmail-adblock-ultra-firefox-vX.Y.Z.zip`
 2. **Chrome:** unzip → `chrome://extensions/` → enable **Developer mode** → **Load unpacked** → select the folder.
-3. **Firefox:** `about:debugging#/runtime/this-firefox` → **Load Temporary Add-on** → pick `manifest.json` inside the unzipped folder. (For a permanent install, the signed build will be published on [AMO](https://addons.mozilla.org/) — temporary add-ons unload on restart.)
+3. **Firefox:** `about:debugging#/runtime/this-firefox` → **Load Temporary Add-on** → pick `manifest.json` inside the unzipped folder. (For a permanent install, the signed build will be published on [AMO](https://addons.mozilla.org/) — temporary add-ons unload on restart.) Also available for Firefox for Android via AMO; on Android use Desktop-site mode in Gmail for full ad-blocking.
 4. Open `https://mail.google.com/` → click the toolbar icon to configure.
 
 ### Option B — from source
